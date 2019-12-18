@@ -66,37 +66,14 @@ func numDecodings(s string) int {
 			} else {
 				return 0
 			}
+		} else if s[i-1] == '1' {
+			states[i] = states[i-1] + states[i-2]
+		} else if s[i-1] == '2' && s[i] >= '1' && s[i] <= '6' {
+			states[i] = states[i-1] + states[i-2]
 		} else {
-			if s[i-1] == '1' {
-				states[i] = states[i-1] + states[i-2]
-			} else if s[i-1] == '2' {
-				if s[i] >= '1' && s[i] <= '6' {
-					states[i] = states[i-1] + states[i-2]
-				} else {
-					states[i] = states[i-1]
-				}
-			} else {
-				states[i] = states[i-1]
-			}
+			states[i] = states[i-1]
 		}
 	}
 
 	return states[len(s)-1]
 }
-
-//for i := 2; i < len(states); i++ {
-//if s[i] == '0' {
-//if s[i-1] != '1' && s[i-1] != '2' {
-//return 0
-//}
-//if states[i-1] == 1 {
-//states[i] = 1
-//} else {
-//states[i] = states[i-1] - 1
-//}
-//} else if s[i-1:i+1] > "26" || s[i-1] == '0' {
-//states[i] = states[i-1]
-//} else if s[i-1:i+1] <= "26" && s[i-1:i+1] >= "11" {
-//states[i] = states[i-1] + 1
-//}
-//}
