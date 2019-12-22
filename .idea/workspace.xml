@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28249913-56a6-41fa-90e9-b7359e719ea5" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/021/mergeTwoLists.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/091/numDecodings.go" beforeDir="false" afterPath="$PROJECT_DIR$/091/numDecodings.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
