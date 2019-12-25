@@ -6,6 +6,7 @@
 021 mergeTwoLists  
 023 mergeKLists  
 028 strStr  
+041 firstMissingPositive  
 051 solveNQueens  
 053 maxSubArray  
 055 canJump  
