@@ -7,6 +7,7 @@
 028 strStr  
 051 solveNQueens  
 053 maxSubArray  
+055 canJump  
 062 uniquePaths  
 064 minPathSum  
 091 numDecodings  
