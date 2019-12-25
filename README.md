@@ -1,7 +1,8 @@
 # leetcode
 
 008 str2int  
-009 isPalindrome  
+009 isPalindrome
+019 removeNthFromEnd  未完成  
 021 mergeTwoLists  
 023 mergeKLists  
 028 strStr  
@@ -13,3 +14,4 @@
 091 numDecodings  
 146 LRU 未通过  
 300 lengthOfLIS  
+1143 longestCommonSubsequence  
