@@ -2,7 +2,7 @@
 
 0008 str2int  
 0009 isPalindrome  
-0019 removeNthFromEnd  未完成  
+0019 removeNthFromEnd    
 0021 mergeTwoLists  
 0023 mergeKLists  
 0026 removeDuplicates
@@ -15,5 +15,6 @@
 0064 minPathSum  
 0091 numDecodings  
 0146 LRU 未通过  
-0300 lengthOfLIS  
+0300 lengthOfLIS
+0718 findLength    
 1143 longestCommonSubsequence  
