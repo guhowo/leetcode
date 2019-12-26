@@ -1,8 +1,8 @@
-package _51
+package _051
 
 //N皇后问题
 func solveNQueens(n int) [][]string {
-	if n<0 {
+	if n < 0 {
 		return nil
 	}
 	output := make([][]string, 0)
@@ -16,14 +16,13 @@ func NQueens(row int, n int, result []int, output *[][]string) {
 		print(result, n, output)
 		return
 	}
-	for i:=0; i<n; i++{
-		if isOk(row, i, n,result) {
+	for i := 0; i < n; i++ {
+		if isOk(row, i, n, result) {
 			result[row] = i
 			NQueens(row+1, n, result, output)
 		}
 	}
 }
-
 
 func isOk(row, column, n int, result []int) bool {
 	leftup, rightup := column-1, column+1
@@ -47,12 +46,12 @@ func isOk(row, column, n int, result []int) bool {
 	}
 	return true
 }
-func print(result []int, n int, output *[][]string){
+func print(result []int, n int, output *[][]string) {
 	out := make([]string, n)
-	for i:=0;  i<len(result); i++{
-		rowStr:=""
-		for j :=0; j<len(result); j++ {
-			if result[j]==i {
+	for i := 0; i < len(result); i++ {
+		rowStr := ""
+		for j := 0; j < len(result); j++ {
+			if result[j] == i {
 				rowStr += "Q"
 			} else {
 				rowStr += "."

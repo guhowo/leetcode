@@ -1,20 +1,19 @@
-package _09
+package _009
 
 import "testing"
 
 func Test_Palindarome(t *testing.T) {
-	for _, unit := range []struct{
-		X int
+	for _, unit := range []struct {
+		X      int
 		Expect bool
-	} {
+	}{
 		{
 			121,
 			true,
-
 		}, {
 			-121,
 			false,
-		},{
+		}, {
 			0,
 			true,
 		}, {

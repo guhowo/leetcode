@@ -1,4 +1,4 @@
-package _28
+package _028
 
 /*
 	实现 strStr() 函数。
