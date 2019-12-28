@@ -13,6 +13,7 @@
 0055 canJump  
 0062 uniquePaths  
 0064 minPathSum  
+0072 minDistance  
 0091 numDecodings  
 0146 LRU 未通过  
 0300 lengthOfLIS   
