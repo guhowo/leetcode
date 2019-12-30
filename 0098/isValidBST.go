@@ -20,11 +20,26 @@ func isValidBST(root *TreeNode) bool {
 		return true
 	}
 
-	queue := make([]*TreeNode, 0)
-	queue = append(queue, root)
+	stack := make([]*TreeNode, 0)
+	res := make([]int, 0) //记录中序遍历的结果
 
-	for len(queue) != 0 {
+	p := root
 
+	for p != nil || len(stack) != 0 {
+		for p != nil {
+			stack = append(stack, p)
+			p = p.Left
+		}
+		if len(stack) != 0 {
+			p = stack[len(stack)-1]
+			if len(res) > 0 && p.Val <= res[len(res)-1] {
+				return false
+			} else {
+				res = append(res, p.Val)
+			}
+			stack = stack[:len(stack)-1]
+			p = p.Right
+		}
 	}
 
 	return true

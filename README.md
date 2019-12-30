@@ -17,8 +17,9 @@
 0072 minDistance  
 0091 numDecodings  
 0094 inorderTraversal  
-0098 isValidBST  未通过  
+0098 isValidBST    
 0146 LRU 未通过  
+0207 canFinish  
 0300 lengthOfLIS   
 0718 findLength    
 1143 longestCommonSubsequence  
