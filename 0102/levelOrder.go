@@ -1,6 +1,4 @@
-package _104
-
-import "math"
+package _102
 
 /**
  * Definition for a binary tree node.
@@ -12,31 +10,23 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-//递归版本
-func maxDepth(root *TreeNode) int {
+func levelOrder(root *TreeNode) [][]int {
 	if root == nil {
-		return 0
-	}
-
-	return int(math.Max(float64(maxDepth(root.Left)), float64(maxDepth(root.Right)))) + 1
-}
-
-//非递归版本
-func maxDepthV2(root *TreeNode) int {
-	if root == nil {
-		return 0
+		return nil
 	}
 
 	queue := make([]*TreeNode, 0)
 	queue = append(queue, root)
+	result := make([][]int, 0)
 
-	depth := 0
-	levelSize := 0
+	level, levelSize := 0, 0
+
 	for len(queue) != 0 {
-		depth++
 		levelSize = len(queue)
+		tmp := make([]int, levelSize)
 		for i := 0; i < levelSize; i++ {
 			p := queue[0]
+			tmp[i] = p.Val
 			if p.Left != nil {
 				queue = append(queue, p.Left)
 			}
@@ -44,7 +34,9 @@ func maxDepthV2(root *TreeNode) int {
 				queue = append(queue, p.Right)
 			}
 			queue = queue[1:]
+			level++
 		}
+		result = append(result, tmp)
 	}
-	return depth
+	return result
 }
