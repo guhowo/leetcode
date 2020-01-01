@@ -7,7 +7,10 @@ func findOrder(numCourses int, prerequisites [][]int) []int {
 		adj[i] = make([]int, 0)
 	}
 
-	//统计每门课程的入度以及邻接表，即被依赖的情况
+	/*
+	 * 统计每门课程的入度以及邻接表，即被依赖的情况
+	 * 其实这里生成逆adj更好，输出就是顺的了
+	 */
 	for _, w := range prerequisites {
 		for _, v := range w[1:] {
 			indegree[v]++
