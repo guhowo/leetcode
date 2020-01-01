@@ -1,6 +1,5 @@
 #include "node.h"
 #include<queue>
-#include<vector>
 using namespace std;
 
 /*
@@ -26,27 +25,27 @@ public:
             return root;
         }
         Node *p = root;
-        Node *q = NULL;
         queue<Node *> que;
         que.push(p);
         int size = 0;   //每一层的大小
 
         while(!que.empty()) {
             size = que.size();
-            vector<Node *> vec; //用于存每一层的节点
+            Node *pre = NULL;
+            Node *cur = NULL;
             for (int i=0; i< size; i++){
-                q = que.front();
+                cur = que.front();
                 que.pop();
-                if (q->left) {
-                    que.push(q->left);
+                if (i > 0) {
+                    pre->next = cur;
                 }
-                if (q->right) {
-                    que.push(q->right);
+                pre = cur;
+                if (cur->left) {
+                    que.push(cur->left);
                 }
-                vec.push_back(q);
-            }
-            for (int i=0; i< vec.size()-1; i++){
-                vec[i]->next=vec[i+1];
+                if (cur->right) {
+                    que.push(cur->right);
+                }
             }
         }
         return root;
