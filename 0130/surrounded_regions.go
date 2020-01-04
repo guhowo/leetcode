@@ -1,6 +1,6 @@
 package _130
 
-func solve(board [][]byte) {
+func solveByBFS(board [][]byte) {
 	if len(board) == 0 || len(board[0]) == 0 {
 		return
 	}
@@ -74,5 +74,87 @@ func solve(board [][]byte) {
 				board[i][j] = 'O'
 			}
 		}
+	}
+}
+
+func solveByDFS(board [][]byte) {
+	if len(board) == 0 || len(board[0]) == 0 {
+		return
+	}
+	type Node struct {
+		row, col int
+	}
+
+	//用于存放#的坐标
+	queue := make([]Node, 0)
+
+	row, col := len(board)-1, len(board[0])-1
+	//扫描边
+	//扫描第0行和最后一行
+	for i := 0; i <= col; i++ {
+		//第一行
+		if board[0][i] == 'O' {
+			board[0][i] = '#'
+			queue = append(queue, Node{0, i})
+		}
+		//最后一行
+		if board[row][i] == 'O' {
+			board[row][i] = '#'
+			queue = append(queue, Node{row, i})
+		}
+	}
+	//扫描第0列和最后一列
+	for i := 0; i <= row; i++ {
+		//第一列
+		if board[i][0] == 'O' {
+			board[i][0] = '#'
+			queue = append(queue, Node{i, 0})
+		}
+		//最后一列
+		if board[i][col] == 'O' {
+			board[i][col] = '#'
+			queue = append(queue, Node{i, col})
+		}
+	}
+
+	for i := 0; i < len(queue); i++ {
+		recurDFS(board, queue[i].row, queue[i].col)
+	}
+
+	for i := 0; i <= row; i++ {
+		for j := 0; j <= col; j++ {
+			if board[i][j] == 'O' {
+				board[i][j] = 'X'
+			}
+			if board[i][j] == '#' {
+				board[i][j] = 'O'
+			}
+		}
+	}
+}
+
+func recurDFS(board [][]byte, x, y int) {
+	//向上
+	if x-1 > 0 && board[x-1][y] == 'O' {
+		board[x-1][y] = '#'
+		recurDFS(board, x-1, y)
+	}
+
+	//向下
+	if x+1 < len(board)-1 && board[x+1][y] == 'O' {
+		board[x+1][y] = '#'
+		recurDFS(board, x+1, y)
+	}
+
+	//向左
+	if y-1 > 0 && board[x][y-1] == 'O' {
+		board[x][y-1] = '#'
+		recurDFS(board, x, y-1)
+	}
+
+	//向右
+	if y+1 < len(board[0])-1 && board[x][y+1] == 'O' {
+		board[x][y+1] = '#'
+		recurDFS(board, x, y+1)
 	}
 }
