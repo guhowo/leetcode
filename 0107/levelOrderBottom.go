@@ -39,8 +39,15 @@ func levelOrderBottom(root *TreeNode) [][]int {
 			queue = queue[1:]
 		}
 		if len(levelQue) != 0 {
-			result = append([][]int{levelQue}, result...)
+			result = append(result, levelQue)
 		}
+	}
+
+	i, j := 0, len(result)-1
+	for i < j {
+		result[i], result[j] = result[j], result[i]
+		i++
+		j--
 	}
 
 	return result
