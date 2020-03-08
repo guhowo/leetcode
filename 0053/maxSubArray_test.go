@@ -12,7 +12,7 @@ func Test_MaxSubArray(t *testing.T) {
 			6,
 		},
 	} {
-		if act := maxSubArray(unit.Nums); act != unit.Expect {
+		if act := maxSubArray2(unit.Nums); act != unit.Expect {
 			t.Errorf("unit = %v, actually = %v, expect = %v", unit, act, unit.Expect)
 		}
 	}
