@@ -17,9 +17,7 @@ func hasPathSum(root *TreeNode, sum int) bool {
 		}
 	}
 
-	l := hasPathSum(root.Left, sum-root.Val)
-	r := hasPathSum(root.Right, sum-root.Val)
-	if l || r {
+	if hasPathSum(root.Left, sum-root.Val) || hasPathSum(root.Right, sum-root.Val) {
 		return true
 	}
 	return false
