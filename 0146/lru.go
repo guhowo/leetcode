@@ -46,7 +46,8 @@ func (this *LRUCache) Put(key int, value int) {
 			delete(this.Index, key)
 			this.Remove(this.Tail.Prev)
 		}
-
+		node = &Node{Key: key, Val: value}
+		this.Index[key] = node
 	}
 	this.SetHead(node)
 }
