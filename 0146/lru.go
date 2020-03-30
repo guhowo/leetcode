@@ -1,90 +1,64 @@
 package _146
 
 type Node struct {
-	Element int
-	Next    *Node
-	Prev    *Node
-}
-
-type List struct {
-	Head   *Node //哨兵，不存数据
-	Tail   *Node
-	Length int
+	Key  int
+	Val  int
+	Next *Node
+	Prev *Node
 }
 
 type LRUCache struct {
 	Capacity int
 	Index    map[int]*Node
-	List     *List
+	Head     *Node
+	Tail     *Node
 }
 
 func Constructor(capacity int) LRUCache {
-	head := &Node{Next: nil, Prev: nil}
-	return LRUCache{
+	cache := LRUCache{
 		Capacity: capacity,
 		Index:    make(map[int]*Node),
-		List:     &List{Head: head, Tail: head, Length: 0},
+		Head:     &Node{},
+		Tail:     &Node{},
 	}
+	cache.Head.Next = cache.Tail
+	cache.Tail.Prev = cache.Head
+	return cache
 }
 
 func (this *LRUCache) Get(key int) int {
-	if _, ok := this.Index[key]; !ok {
+	node, ok := this.Index[key]
+	if !ok {
 		return -1
-	} else {
-		head := this.List.Head
-		p := this.Index[key]
-		p.Prev.Next = p.Next
-		if p.Next != nil {
-			p.Next.Prev = p.Prev
-		} else {
-			this.List.Tail = p.Prev
-		}
-		p.Next = head.Next
-		head.Next.Prev = p
-		head.Next = p
-		p.Prev = head
-		return this.Index[key].Element
 	}
+	this.Remove(node)
+	this.SetHead(node)
+	return node.Val
 }
 
 func (this *LRUCache) Put(key int, value int) {
-	node := &Node{
-		Element: value,
-		Next:    nil,
-		Prev:    this.List.Tail,
-	}
-	head := this.List.Head
-	if _, ok := this.Index[key]; ok {
-		p := this.Index[key]
-		p.Prev.Next = p.Next
-		if p.Next != nil {
-			p.Next.Prev = p.Prev
-		} else {
-			this.List.Tail = p.Prev
-		}
-		p.Next = head.Next
-		head.Next.Prev = p
-		head.Next = p
-		p.Prev = head
-	} else if len(this.Index)+1 <= this.Capacity {
-		if head.Next == nil {
-			this.List.Tail = node
-			head.Next = node
-			node.Prev = head
-			return
-		}
-		node.Next = head.Next
-		head.Next.Prev = node
-		node.Prev = head
-		head.Next = node
-		this.Index[key] = node
+	node, ok := this.Index[key]
+	if ok {
+		this.Remove(node)
+		node.Val = value
 	} else {
-		node.Next = head.Next
-		head.Next.Prev = node
-		node.Prev = head
-		head.Next = node
-		delete(this.Index, this.List.Tail.Element)
-		this.List.Tail.Prev.Next = nil
-		this.List.Tail = this.List.Tail.Prev
+		if this.Capacity == len(this.Index) {
+			delete(this.Index)
+			this.Remove(this.Tail.Prev)
+		}
+
 	}
+	this.SetHead(node)
+}
+
+func (this *LRUCache) Remove(node *Node) {
+	node.Prev.Next = node.Next
+	node.Next.Prev = node.Prev
+}
+
+func (this *LRUCache) SetHead(node *Node) {
+	node.Next = this.Head.Next
+	node.Next.Prev = node
+	this.Head.Next = node
+	node.Prev = this.Head
 }
