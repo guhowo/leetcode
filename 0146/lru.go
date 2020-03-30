@@ -43,7 +43,7 @@ func (this *LRUCache) Put(key int, value int) {
 		node.Val = value
 	} else {
 		if this.Capacity == len(this.Index) {
-			delete(this.Index)
+			delete(this.Index, key)
 			this.Remove(this.Tail.Prev)
 		}
 
